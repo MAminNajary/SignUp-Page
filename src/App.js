@@ -3,7 +3,10 @@ import './App.css';
 function App() {
   return (
     <div>
-      amin
+      <label>
+        Name:
+      </label>
+      <input />
     </div>
   );
 }
