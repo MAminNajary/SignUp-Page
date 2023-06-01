@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Validation } from './Validation';
-
+import style from '../styles/SignUp.module.css';
+import logo from '../assets/img/1684660209887.png';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import notify from './notify';
 
 const SignUp = () => {
 
@@ -22,6 +26,7 @@ const SignUp = () => {
     const submitHandler = (event) => {
         event.preventDefault();
         if(Object.keys(err).length) {
+            notify('error', 'اطلاعات را به درستی وارد کنید');
             setTouched({
                 name: true,
                 email: true,
@@ -29,7 +34,7 @@ const SignUp = () => {
                 confirmPassword: true,
             })
         } else {
-            alert("test")
+            notify('success', 'ثبت نام با موفقیت انجام شد');
         }
     }
     const changeHandler = event => {
@@ -44,39 +49,41 @@ const SignUp = () => {
     }
     
     return (
-        <div>
-        <form onSubmit={submitHandler}>
-            <h1>SignUp</h1>
-            <div>
-                <label>Name:</label>
-                <input type='text' name='name' value={data.name} onChange={changeHandler} onFocus={focusHandler} />
-                {err.name && touched.name && <span>{err.name}</span>}
+        <div className={style.body}>
+            <div className={style.info}>
+                <h2>گروه صنعتی هارپی</h2>
+                <img src={logo}/>
+                <p>قبلا ثبت نام کرده اید؟ <a href='#'>وارد شوید</a></p>
             </div>
-            <div>
-                <label>Email:</label>
-                <input type='text' name='email' value={data.email} onChange={changeHandler} onFocus={focusHandler} />
-                {err.email && touched.email && <span>{err.email}</span>}
+            <div className={style.main}>
+                <form className={style.contentForm} onSubmit={submitHandler}>
+                    <h1>ثبت نام کنید!</h1>
+                    <div className={style.inputs}>
+                        <input placeholder='نام کاربری' type='text' name='name' value={data.name} onChange={changeHandler} onFocus={focusHandler} />
+                        {err.name && touched.name && <span>{err.name}</span>}
+                    </div>
+                    <div className={style.inputs}>
+                        <input placeholder='ایمیل' type='text' name='email' value={data.email} onChange={changeHandler} onFocus={focusHandler} />
+                        {err.email && touched.email && <span>{err.email}</span>}
+                    </div>
+                    <div className={style.inputs}>
+                        <input placeholder='رمزعبور' type='password' name='password' value={data.password} onChange={changeHandler} onFocus={focusHandler} />
+                        {err.password && touched.password && <span>{err.password}</span>}
+                    </div>
+                    <div className={style.inputs}>
+                        <input placeholder='تکرار رمزعبور' type='password' name='confirmPassword' value={data.confirmPassword} onChange={changeHandler} onFocus={focusHandler} />
+                        {err.confirmPassword && touched.confirmPassword && <span>{err.confirmPassword}</span>}
+                    </div>
+                    <div className={style.inputCheckbox}>
+                        <label>با <a href='#'>شرایط و قوانین هارپی</a> موافقم!</label>
+                        <input type='checkbox' name='isAccepted' value={data.isAccepted} onChange={changeHandler} />
+                    </div>
+                    <div className={style.btnSubmit}>
+                        <button type='submit'>ثبت اطلاعات</button>
+                    </div>
+                </form>
             </div>
-            <div>
-                <label>Password:</label>
-                <input type='password' name='password' value={data.password} onChange={changeHandler} onFocus={focusHandler} />
-                {err.password && touched.password && <span>{err.password}</span>}
-            </div>
-            <div>
-                <label>Confirm Password:</label>
-                <input type='password' name='confirmPassword' value={data.confirmPassword} onChange={changeHandler} onFocus={focusHandler} />
-                {err.confirmPassword && touched.confirmPassword && <span>{err.confirmPassword}</span>}
-            </div>
-            <div>
-                <label>Accept our reguation</label>
-                <input type='checkbox' name='isAccepted' value={data.isAccepted} onChange={changeHandler} />
-                {err.isAccepted && <span>{err.isAccepted}</span>}
-            </div>
-            <div>
-                <button type='submit'>SignUp</button>
-                <a href='#'>Login</a>
-            </div>
-        </form>
+            <ToastContainer />
         </div>
     );
 };
