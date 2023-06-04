@@ -16,7 +16,8 @@
     flex-direction: row-reverse;
     background: linear-gradient(to right, #838383, #4d4d4d);
     width: 100%;
-    height: 100vh;
+    min-height: 100vh;
+    max-height: 900px;
 }
 
 .info {
@@ -116,9 +117,9 @@
 
 /* /////////////// mediaquery ///////////////// */
 
-@media screen and (max-width: 720px) {
+/* @media screen and (max-width: 720px) {
     .body {
-        height: 100vh;
+        height: 900px;
     }
     .info img {
         width: 150px;
@@ -143,11 +144,11 @@
         height: 35px;
         font-size: 15px;
     }
-}
-@media screen and (max-width: 618px) {
+} */
+@media screen and (max-width: 720px) {
     .body {
         flex-direction: column;
-        height: 850px;
+        height: 1000px;
     }
     .info {
         width: calc(100% - 20px);
