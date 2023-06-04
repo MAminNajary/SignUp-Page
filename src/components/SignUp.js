@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Validation } from './Validation';
 import style from '../styles/SignUp.module.css';
-import logo from '../assets/img/1684660209887.png';
+import logo from '../assets/img/logo.png';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import notify from './notify';

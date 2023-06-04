@@ -117,6 +117,9 @@
 /* /////////////// mediaquery ///////////////// */
 
 @media screen and (max-width: 720px) {
+    .body {
+        height: 100vh;
+    }
     .info img {
         width: 150px;
         height: 150px;
@@ -144,6 +147,7 @@
 @media screen and (max-width: 618px) {
     .body {
         flex-direction: column;
+        height: 850px;
     }
     .info {
         width: calc(100% - 20px);
