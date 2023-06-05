@@ -7,21 +7,18 @@ import 'react-toastify/dist/ReactToastify.css';
 import notify from './notify';
 import { Link } from 'react-router-dom';
 
-const SignUp = () => {
+const Login = () => {
 
     const [data, setData] = useState({
-        name: "",
         email: "",
         password: "",
-        confirmPassword: "",
-        isAccepted: false,
     });
     const [err, setErr] = useState({});
     const [touched, setTouched] = useState({});
 
 
     useEffect(() => {
-        setErr(Validation(data, 'SignUp'))
+        setErr(Validation(data, 'Login'))
     }, [data, touched])
 
     const submitHandler = (event) => {
@@ -29,21 +26,15 @@ const SignUp = () => {
         if(Object.keys(err).length) {
             notify('error', 'اطلاعات را به درستی وارد کنید');
             setTouched({
-                name: true,
                 email: true,
                 password: true,
-                confirmPassword: true,
             })
         } else {
-            notify('success', 'ثبت نام با موفقیت انجام شد');
+            notify('success', 'خوش آمدید!');
         }
     }
     const changeHandler = event => {
-        if(event.target.name === "isAccepted") {
-            setData({...data, [event.target.name]: event.target.checked})
-        } else {
             setData({...data, [event.target.name]: event.target.value})
-        }
     }
     const focusHandler = event => {
         setTouched({...touched, [event.target.name]: event.target.focus})
@@ -54,15 +45,11 @@ const SignUp = () => {
             <div className={style.info}>
                 <h2>گروه صنعتی هارپی</h2>
                 <img src={logo}/>
-                <p>قبلا ثبت نام کرده اید؟ <Link to='/login'>وارد شوید</Link></p>
+                <p>حساب کاربری ندارید؟ <Link to='/signUp'>ثبت نام کنید</Link></p>
             </div>
             <div className={style.main}>
-                <form className={style.contentForm} onSubmit={submitHandler}>
-                    <h1>ثبت نام کنید!</h1>
-                    <div className={style.inputs}>
-                        <input placeholder='نام کاربری' type='text' name='name' value={data.name} onChange={changeHandler} onFocus={focusHandler} />
-                        {err.name && touched.name && <span>{err.name}</span>}
-                    </div>
+                <form id={style.LoginForm} onSubmit={submitHandler}>
+                    <h1>فرم ورود</h1>
                     <div className={style.inputs}>
                         <input placeholder='ایمیل' type='text' name='email' value={data.email} onChange={changeHandler} onFocus={focusHandler} />
                         {err.email && touched.email && <span>{err.email}</span>}
@@ -71,16 +58,8 @@ const SignUp = () => {
                         <input placeholder='رمزعبور' type='password' name='password' value={data.password} onChange={changeHandler} onFocus={focusHandler} />
                         {err.password && touched.password && <span>{err.password}</span>}
                     </div>
-                    <div className={style.inputs}>
-                        <input placeholder='تکرار رمزعبور' type='password' name='confirmPassword' value={data.confirmPassword} onChange={changeHandler} onFocus={focusHandler} />
-                        {err.confirmPassword && touched.confirmPassword && <span>{err.confirmPassword}</span>}
-                    </div>
-                    <div className={style.inputCheckbox}>
-                        <label>با <a href='#'>شرایط و قوانین هارپی</a> موافقم!</label>
-                        <input type='checkbox' name='isAccepted' value={data.isAccepted} onChange={changeHandler} />
-                    </div>
                     <div className={style.btnSubmit}>
-                        <button type='submit'>ثبت اطلاعات</button>
+                        <button type='submit'>ورود</button>
                     </div>
                 </form>
             </div>
@@ -89,4 +68,4 @@ const SignUp = () => {
     );
 };
 
-export default SignUp;
+export default Login;
